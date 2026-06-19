@@ -64,10 +64,19 @@ const Sidebar = () => {
   Vehicles
 </NavLink>
 
-        <div className="flex items-center gap-3 p-3">
-          <Wrench size={20} />
-          Services
-        </div>
+       <NavLink
+  to="/services"
+  className={({ isActive }) =>
+    `flex items-center gap-3 p-3 rounded-lg ${
+      isActive
+        ? "bg-slate-700"
+        : "hover:bg-slate-800"
+    }`
+  }
+>
+  <Wrench size={20} />
+  Services
+</NavLink>
 
         <div className="flex items-center gap-3 p-3">
           <Package size={20} />

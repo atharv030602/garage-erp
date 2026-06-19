@@ -5,6 +5,7 @@ import Sidebar from "./components/Sidebar";
 import Dashboard from "./pages/Dashboard";
 import Customers from "./pages/Customers";
 import Vehicles from "./pages/Vehicles";
+import Services from "./pages/Services";
 
 import { useTheme } from "./context/ThemeContext";
 
@@ -32,6 +33,10 @@ function App() {
           <Route
           path="/vehicles"
           element={<Vehicles />}
+          />
+          <Route
+          path="/services"
+          element={<Services />}
           />
         </Routes>
       </div>
