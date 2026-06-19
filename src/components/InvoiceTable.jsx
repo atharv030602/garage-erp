@@ -2,6 +2,7 @@ const InvoiceTable = ({
   invoices,
   deleteInvoice,
   editInvoice,
+  viewInvoice,
 }) => {
   return (
     <div className="bg-white p-6 rounded-xl shadow-md">
@@ -98,6 +99,23 @@ const InvoiceTable = ({
                 </td>
 
                 <td className="p-3">
+
+                  <button
+                    onClick={() =>
+                      viewInvoice(invoice)
+                    }
+                    className="
+                    bg-blue-600
+                    text-white
+                    px-3
+                    py-1
+                    rounded
+                    mr-2
+                    hover:bg-blue-700
+                    "
+                  >
+                    View
+                  </button>
 
                   <button
                     onClick={() =>

@@ -3,19 +3,28 @@ import { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import InvoiceForm from "../components/InvoiceForm";
 import InvoiceTable from "../components/InvoiceTable";
+import InvoiceModal from "../components/InvoiceModal";
 
 const Billing = () => {
   const [invoices, setInvoices] = useState([]);
   const [services, setServices] = useState([]);
+
   const [editingInvoice, setEditingInvoice] =
+    useState(null);
+
+  const [selectedInvoice, setSelectedInvoice] =
     useState(null);
 
   useEffect(() => {
     const savedInvoices =
-      JSON.parse(localStorage.getItem("invoices")) || [];
+      JSON.parse(
+        localStorage.getItem("invoices")
+      ) || [];
 
     const savedServices =
-      JSON.parse(localStorage.getItem("services")) || [];
+      JSON.parse(
+        localStorage.getItem("services")
+      ) || [];
 
     setInvoices(savedInvoices);
     setServices(savedServices);
@@ -29,22 +38,29 @@ const Billing = () => {
   }, [invoices]);
 
   const addInvoice = (invoice) => {
-    setInvoices([...invoices, invoice]);
+    setInvoices([
+      ...invoices,
+      invoice,
+    ]);
   };
 
   const deleteInvoice = (id) => {
     const updatedInvoices =
       invoices.filter(
-        (invoice) => invoice.id !== id
+        (invoice) =>
+          invoice.id !== id
       );
 
     setInvoices(updatedInvoices);
   };
 
-  const updateInvoice = (updatedInvoice) => {
+  const updateInvoice = (
+    updatedInvoice
+  ) => {
     const updatedInvoices =
       invoices.map((invoice) =>
-        invoice.id === updatedInvoice.id
+        invoice.id ===
+        updatedInvoice.id
           ? updatedInvoice
           : invoice
       );
@@ -66,15 +82,39 @@ const Billing = () => {
         services={services}
         invoices={invoices}
         addInvoice={addInvoice}
-        editingInvoice={editingInvoice}
-        updateInvoice={updateInvoice}
+        editingInvoice={
+          editingInvoice
+        }
+        updateInvoice={
+          updateInvoice
+        }
       />
 
       <InvoiceTable
         invoices={invoices}
-        deleteInvoice={deleteInvoice}
-        editInvoice={setEditingInvoice}
+        deleteInvoice={
+          deleteInvoice
+        }
+        editInvoice={
+          setEditingInvoice
+        }
+        viewInvoice={
+          setSelectedInvoice
+        }
       />
+
+      {selectedInvoice && (
+
+        <InvoiceModal
+          invoice={selectedInvoice}
+          onClose={() =>
+            setSelectedInvoice(
+              null
+            )
+          }
+        />
+
+      )}
 
     </div>
   );
