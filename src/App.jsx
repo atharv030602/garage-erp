@@ -8,6 +8,8 @@ import Vehicles from "./pages/Vehicles";
 import Services from "./pages/Services";
 import Billing from "./pages/Billing";
 import Inventory from "./pages/Inventory";
+import License from "./pages/License";
+import Reports from "./pages/Reports";
 
 import { useTheme } from "./context/ThemeContext";
 
@@ -47,6 +49,14 @@ function App() {
           <Route
           path="/inventory"
           element={<Inventory/>}
+          />
+          <Route
+          path="/license"
+          element={<License />}
+          />
+          <Route
+          path="/reports"
+          element={<Reports />}
           />
         </Routes>
       </div>

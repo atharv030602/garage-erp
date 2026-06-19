@@ -106,20 +106,38 @@ const Sidebar = () => {
           Billing
         </NavLink>
 
-        <div className="flex items-center gap-3 p-3 opacity-50">
+        <NavLink
+          to="/license"
+          className={({ isActive }) =>
+            `flex items-center gap-3 p-3 rounded-lg ${
+              isActive
+                ? "bg-slate-700"
+                : "hover:bg-slate-800"
+            }`
+          }
+        >
           <IdCard size={20} />
           License
-        </div>
+        </NavLink>
 
         <div className="flex items-center gap-3 p-3 opacity-50">
           <Shield size={20} />
           Insurance
         </div>
 
-        <div className="flex items-center gap-3 p-3 opacity-50">
+        <NavLink
+          to="/reports"
+          className={({ isActive }) =>
+            `flex items-center gap-3 p-3 rounded-lg ${
+              isActive
+                ? "bg-slate-700"
+                : "hover:bg-slate-800"
+            }`
+          }
+        >
           <BarChart3 size={20} />
           Reports
-        </div>
+        </NavLink>
 
       </div>
 
