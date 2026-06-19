@@ -1,22 +1,20 @@
-const CustomerTable = () => {
+const CustomerTable = ({
+  customers,
+  deleteCustomer,
+  editCustomer
+}) => {
   return (
     <div className="bg-white p-6 rounded-xl shadow-md">
 
-      <div className="flex justify-between mb-4">
+      <h2 className="text-2xl font-semibold mb-4">
+        Customer List
+      </h2>
 
-        <h2 className="text-2xl font-semibold">
-          Customer List
-        </h2>
+      <p className="mb-4">
+        Total Customers : {customers.length}
+      </p>
 
-        <input
-          type="text"
-          placeholder="Search Customer"
-          className="border p-2 rounded-lg"
-        />
-
-      </div>
-
-      <table className="w-full border-collapse">
+      <table className="w-full">
 
         <thead>
 
@@ -48,54 +46,59 @@ const CustomerTable = () => {
 
         <tbody>
 
-          <tr>
+          {customers.map((customer) => (
 
-            <td className="p-3">
-              Atharv
-            </td>
+            <tr
+              key={customer.id}
+              className="border-b"
+            >
 
-            <td className="p-3">
-              9876543210
-            </td>
+              <td className="p-3">
+                {customer.name}
+              </td>
 
-            <td className="p-3">
-              MH31AB1234
-            </td>
+              <td className="p-3">
+                {customer.mobile}
+              </td>
 
-            <td className="p-3">
-              Car
-            </td>
+              <td className="p-3">
+                {customer.vehicleNumber}
+              </td>
 
-            <td className="p-3">
+              <td className="p-3">
+                {customer.vehicleType}
+              </td>
 
-              <button
-                className="
-                bg-yellow-500
-                text-white
-                px-3
-                py-1
-                rounded
-                mr-2
-                "
-              >
-                Edit
-              </button>
+              <td className="p-3">
 
-              <button
-                className="
-                bg-red-600
-                text-white
-                px-3
-                py-1
-                rounded
-                "
-              >
-                Delete
-              </button>
+                <button
+                  onClick={() =>
+                    deleteCustomer(customer.id)
+                  }
+                  className="
+                  bg-red-600
+                  text-white
+                  px-3
+                  py-1
+                  rounded
+                  "
+                >
+                  Delete
+                </button>
+                  <button
+  onClick={() => {
+    console.log(customer);
+    editCustomer(customer);
+  }}
+>
+  Edit
+</button>
 
-            </td>
+              </td>
 
-          </tr>
+            </tr>
+
+          ))}
 
         </tbody>
 

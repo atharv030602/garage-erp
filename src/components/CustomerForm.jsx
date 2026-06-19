@@ -1,48 +1,119 @@
-const CustomerForm = () => {
+import { useState, useEffect } from "react";
+import { Plus } from "lucide-react";
+
+const CustomerForm = ({
+  addCustomer,
+  editingCustomer,
+  updateCustomer,
+}) => {
+  const [formData, setFormData] = useState({
+    name: "",
+    mobile: "",
+    vehicleNumber: "",
+    vehicleType: "",
+    brand: "",
+    model: "",
+    address: "",
+  });
+
+  useEffect(() => {
+    if (editingCustomer) {
+      setFormData(editingCustomer);
+    }
+  }, [editingCustomer]);
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = () => {
+    if (
+      !formData.name ||
+      !formData.mobile ||
+      !formData.vehicleNumber
+    ) {
+      alert("Please fill mandatory fields");
+      return;
+    }
+
+    if (editingCustomer) {
+      updateCustomer(formData);
+    } else {
+      addCustomer({
+        id: Date.now(),
+        ...formData,
+      });
+    }
+
+    setFormData({
+      name: "",
+      mobile: "",
+      vehicleNumber: "",
+      vehicleType: "",
+      brand: "",
+      model: "",
+      address: "",
+    });
+  };
+
   return (
     <div className="bg-white p-6 rounded-xl shadow-md mb-6">
 
-      <h2 className="text-2xl font-semibold mb-5">
-        Add Customer
+      <h2 className="text-2xl font-semibold mb-6">
+        {editingCustomer
+          ? "Edit Customer"
+          : "Add Customer"}
       </h2>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="grid grid-cols-2 gap-4">
 
         <input
-          type="text"
+          name="name"
+          value={formData.name}
+          onChange={handleChange}
           placeholder="Customer Name"
           className="border p-3 rounded-lg"
         />
 
         <input
-          type="text"
+          name="mobile"
+          value={formData.mobile}
+          onChange={handleChange}
           placeholder="Mobile Number"
           className="border p-3 rounded-lg"
         />
 
         <input
-          type="text"
+          name="vehicleNumber"
+          value={formData.vehicleNumber}
+          onChange={handleChange}
           placeholder="Vehicle Number"
           className="border p-3 rounded-lg"
         />
 
-        <select
+        <input
+          name="vehicleType"
+          value={formData.vehicleType}
+          onChange={handleChange}
+          placeholder="Vehicle Type"
           className="border p-3 rounded-lg"
-        >
-          <option>Bike</option>
-          <option>Car</option>
-          <option>Auto</option>
-          <option>Truck</option>
-        </select>
+        />
 
         <input
-          type="text"
+          name="brand"
+          value={formData.brand}
+          onChange={handleChange}
           placeholder="Vehicle Brand"
           className="border p-3 rounded-lg"
         />
 
         <input
-          type="text"
+          name="model"
+          value={formData.model}
+          onChange={handleChange}
           placeholder="Vehicle Model"
           className="border p-3 rounded-lg"
         />
@@ -50,12 +121,15 @@ const CustomerForm = () => {
       </div>
 
       <textarea
-        placeholder="Customer Address"
+        name="address"
+        value={formData.address}
+        onChange={handleChange}
+        placeholder="Address"
         className="border p-3 rounded-lg w-full mt-4"
-        rows="3"
-      ></textarea>
+      />
 
       <button
+        onClick={handleSubmit}
         className="
         mt-4
         bg-blue-600
@@ -63,10 +137,16 @@ const CustomerForm = () => {
         px-6
         py-3
         rounded-lg
-        hover:bg-blue-700
+        flex
+        items-center
+        gap-2
         "
       >
-        Save Customer
+        <Plus size={18} />
+
+        {editingCustomer
+          ? "Update Customer"
+          : "Add Customer"}
       </button>
 
     </div>

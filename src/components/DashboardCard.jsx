@@ -1,10 +1,12 @@
 import React from "react";
+import { useTheme } from "../context/ThemeContext";
 
 const DashboardCard = ({ title, value, color, icon }) => {
+  const { darkMode } = useTheme();
+
   return (
     <div
       className={`
-      bg-white
       rounded-xl
       shadow-md
       p-6
@@ -14,13 +16,24 @@ const DashboardCard = ({ title, value, color, icon }) => {
       transition-all
       duration-300
       ${color}
+      ${
+        darkMode
+          ? "bg-slate-800 text-white"
+          : "bg-white text-black"
+      }
       `}
     >
       <div className="flex justify-between items-center">
 
         <div>
 
-          <h3 className="text-gray-500 text-sm">
+          <h3
+            className={
+              darkMode
+                ? "text-slate-400 text-sm"
+                : "text-gray-500 text-sm"
+            }
+          >
             {title}
           </h3>
 
@@ -30,7 +43,13 @@ const DashboardCard = ({ title, value, color, icon }) => {
 
         </div>
 
-        <div className="text-slate-400">
+        <div
+          className={
+            darkMode
+              ? "text-slate-500"
+              : "text-slate-400"
+          }
+        >
           {icon}
         </div>
 
