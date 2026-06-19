@@ -1,19 +1,18 @@
 import { useEffect, useState } from "react";
 
 const VehicleForm = ({
+  customers,
   addVehicle,
   editingVehicle,
   updateVehicle,
 }) => {
-
-  const [formData, setFormData] =
-    useState({
-      ownerName: "",
-      vehicleNumber: "",
-      brand: "",
-      model: "",
-      fuelType: "",
-    });
+  const [formData, setFormData] = useState({
+    ownerName: "",
+    vehicleNumber: "",
+    brand: "",
+    model: "",
+    fuelType: "",
+  });
 
   useEffect(() => {
     if (editingVehicle) {
@@ -24,18 +23,16 @@ const VehicleForm = ({
   const handleChange = (e) => {
     setFormData({
       ...formData,
-      [e.target.name]:
-        e.target.value,
+      [e.target.name]: e.target.value,
     });
   };
 
   const handleSubmit = () => {
-
     if (
       !formData.ownerName ||
       !formData.vehicleNumber
     ) {
-      alert("Fill required fields");
+      alert("Please fill required fields");
       return;
     }
 
@@ -61,73 +58,130 @@ const VehicleForm = ({
     <div className="bg-white p-6 rounded-xl shadow-md mb-6">
 
       <h2 className="text-2xl font-semibold mb-6">
-        {
-          editingVehicle
-            ? "Edit Vehicle"
-            : "Add Vehicle"
-        }
+        {editingVehicle
+          ? "Edit Vehicle"
+          : "Add Vehicle"}
       </h2>
 
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
 
-        <input
-          name="ownerName"
-          value={formData.ownerName}
-          onChange={handleChange}
-          placeholder="Owner Name"
-          className="border p-3 rounded-lg"
-        />
+        <div>
+          <label className="block mb-2 font-medium">
+            Customer
+          </label>
 
-        <input
-          name="vehicleNumber"
-          value={formData.vehicleNumber}
-          onChange={handleChange}
-          placeholder="Vehicle Number"
-          className="border p-3 rounded-lg"
-        />
+          <select
+            name="ownerName"
+            value={formData.ownerName}
+            onChange={handleChange}
+            className="border p-3 rounded-lg w-full"
+          >
+            <option value="">
+              Select Customer
+            </option>
 
-        <input
-          name="brand"
-          value={formData.brand}
-          onChange={handleChange}
-          placeholder="Brand"
-          className="border p-3 rounded-lg"
-        />
+            {customers.map((customer) => (
+              <option
+                key={customer.id}
+                value={customer.name}
+              >
+                {customer.name}
+              </option>
+            ))}
+          </select>
+        </div>
 
-        <input
-          name="model"
-          value={formData.model}
-          onChange={handleChange}
-          placeholder="Model"
-          className="border p-3 rounded-lg"
-        />
+        <div>
+          <label className="block mb-2 font-medium">
+            Vehicle Number
+          </label>
 
-        <input
-          name="fuelType"
-          value={formData.fuelType}
-          onChange={handleChange}
-          placeholder="Fuel Type"
-          className="border p-3 rounded-lg"
-        />
+          <input
+            type="text"
+            name="vehicleNumber"
+            value={formData.vehicleNumber}
+            onChange={handleChange}
+            placeholder="MH31AB1234"
+            className="border p-3 rounded-lg w-full"
+          />
+        </div>
+
+        <div>
+          <label className="block mb-2 font-medium">
+            Brand
+          </label>
+
+          <input
+            type="text"
+            name="brand"
+            value={formData.brand}
+            onChange={handleChange}
+            placeholder="Maruti"
+            className="border p-3 rounded-lg w-full"
+          />
+        </div>
+
+        <div>
+          <label className="block mb-2 font-medium">
+            Model
+          </label>
+
+          <input
+            type="text"
+            name="model"
+            value={formData.model}
+            onChange={handleChange}
+            placeholder="Swift"
+            className="border p-3 rounded-lg w-full"
+          />
+        </div>
+
+        <div>
+          <label className="block mb-2 font-medium">
+            Fuel Type
+          </label>
+
+          <select
+            name="fuelType"
+            value={formData.fuelType}
+            onChange={handleChange}
+            className="border p-3 rounded-lg w-full"
+          >
+            <option value="">
+              Select Fuel Type
+            </option>
+            <option value="Petrol">
+              Petrol
+            </option>
+            <option value="Diesel">
+              Diesel
+            </option>
+            <option value="CNG">
+              CNG
+            </option>
+            <option value="Electric">
+              Electric
+            </option>
+          </select>
+        </div>
 
       </div>
 
       <button
         onClick={handleSubmit}
         className="
-        mt-4
+        mt-6
         bg-blue-600
         text-white
         px-6
         py-3
         rounded-lg
+        hover:bg-blue-700
         "
       >
-        {
-          editingVehicle
-            ? "Update Vehicle"
-            : "Add Vehicle"
-        }
+        {editingVehicle
+          ? "Update Vehicle"
+          : "Add Vehicle"}
       </button>
 
     </div>

@@ -6,6 +6,7 @@ import VehicleTable from "../components/VehicleTable";
 
 const Vehicles = () => {
   const [vehicles, setVehicles] = useState([]);
+  const [customers, setCustomers] = useState([]);
   const [editingVehicle, setEditingVehicle] =
     useState(null);
 
@@ -14,6 +15,13 @@ const Vehicles = () => {
       JSON.parse(localStorage.getItem("vehicles")) || [];
 
     setVehicles(savedVehicles);
+  }, []);
+
+  useEffect(() => {
+    const savedCustomers =
+      JSON.parse(localStorage.getItem("customers")) || [];
+
+    setCustomers(savedCustomers);
   }, []);
 
   useEffect(() => {
@@ -58,6 +66,7 @@ const Vehicles = () => {
       </h1>
 
       <VehicleForm
+        customers={customers}
         addVehicle={addVehicle}
         editingVehicle={editingVehicle}
         updateVehicle={updateVehicle}
