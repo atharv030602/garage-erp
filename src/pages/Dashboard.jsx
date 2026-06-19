@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+
 import DashboardCard from "../components/DashboardCard";
 import Navbar from "../components/Navbar";
 
@@ -6,11 +8,56 @@ import {
   Car,
   Wrench,
   IndianRupee,
-  Package,
-  IdCard,
+  Receipt,
+  FileText,
 } from "lucide-react";
 
 const Dashboard = () => {
+  const [customers, setCustomers] = useState([]);
+  const [vehicles, setVehicles] = useState([]);
+  const [services, setServices] = useState([]);
+  const [invoices, setInvoices] = useState([]);
+
+  useEffect(() => {
+    setCustomers(
+      JSON.parse(
+        localStorage.getItem("customers")
+      ) || []
+    );
+
+    setVehicles(
+      JSON.parse(
+        localStorage.getItem("vehicles")
+      ) || []
+    );
+
+    setServices(
+      JSON.parse(
+        localStorage.getItem("services")
+      ) || []
+    );
+
+    setInvoices(
+      JSON.parse(
+        localStorage.getItem("invoices")
+      ) || []
+    );
+  }, []);
+
+  const totalRevenue =
+    invoices.reduce(
+      (total, invoice) =>
+        total +
+        Number(invoice.totalAmount || 0),
+      0
+    );
+
+  const pendingServices =
+    services.filter(
+      (service) =>
+        service.status === "Pending"
+    ).length;
+
   return (
     <div className="flex-1 p-6">
 
@@ -24,44 +71,44 @@ const Dashboard = () => {
 
         <DashboardCard
           title="Total Customers"
-          value="250"
+          value={customers.length}
           color="border-blue-500"
           icon={<Users size={40} />}
         />
 
         <DashboardCard
           title="Total Vehicles"
-          value="180"
+          value={vehicles.length}
           color="border-cyan-500"
           icon={<Car size={40} />}
         />
 
         <DashboardCard
           title="Pending Services"
-          value="12"
+          value={pendingServices}
           color="border-yellow-500"
           icon={<Wrench size={40} />}
         />
 
         <DashboardCard
           title="Revenue"
-          value="₹50,000"
+          value={`₹${totalRevenue}`}
           color="border-green-500"
           icon={<IndianRupee size={40} />}
         />
 
         <DashboardCard
-          title="Low Stock Parts"
-          value="5"
+          title="Total Invoices"
+          value={invoices.length}
           color="border-red-500"
-          icon={<Package size={40} />}
+          icon={<Receipt size={40} />}
         />
 
         <DashboardCard
-          title="Expiring Licenses"
-          value="8"
+          title="Total Job Cards"
+          value={services.length}
           color="border-purple-500"
-          icon={<IdCard size={40} />}
+          icon={<FileText size={40} />}
         />
 
       </div>
@@ -75,19 +122,27 @@ const Dashboard = () => {
         <ul className="space-y-3">
 
           <li>
-            Vehicle MH31AB1234 serviced
+            Customers Registered :
+            {" "}
+            {customers.length}
           </li>
 
           <li>
-            Invoice #1001 generated
+            Vehicles Added :
+            {" "}
+            {vehicles.length}
           </li>
 
           <li>
-            License renewal pending
+            Job Cards Created :
+            {" "}
+            {services.length}
           </li>
 
           <li>
-            New customer added
+            Invoices Generated :
+            {" "}
+            {invoices.length}
           </li>
 
         </ul>
