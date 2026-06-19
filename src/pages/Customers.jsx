@@ -1,3 +1,6 @@
+import CustomerForm from "../components/CustomerForm";
+import CustomerTable from "../components/CustomerTable";
+
 const Customers = () => {
   return (
     <div className="flex-1 p-6">
@@ -6,13 +9,9 @@ const Customers = () => {
         Customer Management
       </h1>
 
-      <div className="bg-white rounded-xl p-6 shadow">
+      <CustomerForm />
 
-        <h2 className="text-xl font-semibold">
-          Customer Module
-        </h2>
-
-      </div>
+      <CustomerTable />
 
     </div>
   );

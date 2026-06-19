@@ -1,7 +1,9 @@
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Sidebar from "./components/Sidebar";
+
 import Dashboard from "./pages/Dashboard";
+import Customers from "./pages/Customers";
 
 import { useTheme } from "./context/ThemeContext";
 
@@ -18,7 +20,15 @@ function App() {
         }
       >
         <Sidebar />
-        <Dashboard />
+
+        <Routes>
+          <Route path="/" element={<Dashboard />} />
+
+          <Route
+            path="/customers"
+            element={<Customers />}
+          />
+        </Routes>
       </div>
     </BrowserRouter>
   );
