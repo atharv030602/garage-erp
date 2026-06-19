@@ -7,6 +7,7 @@ import Customers from "./pages/Customers";
 import Vehicles from "./pages/Vehicles";
 import Services from "./pages/Services";
 import Billing from "./pages/Billing";
+import Inventory from "./pages/Inventory";
 
 import { useTheme } from "./context/ThemeContext";
 
@@ -42,6 +43,10 @@ function App() {
           <Route
           path="/billing"
           element={<Billing/>}
+          />
+          <Route
+          path="/inventory"
+          element={<Inventory/>}
           />
         </Routes>
       </div>

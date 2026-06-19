@@ -51,68 +51,78 @@ const Sidebar = () => {
         </NavLink>
 
         <NavLink
-  to="/vehicles"
-  className={({ isActive }) =>
-    `flex items-center gap-3 p-3 rounded-lg ${
-      isActive
-        ? "bg-slate-700"
-        : "hover:bg-slate-800"
-    }`
-  }
->
-  <Car size={20} />
-  Vehicles
-</NavLink>
+          to="/vehicles"
+          className={({ isActive }) =>
+            `flex items-center gap-3 p-3 rounded-lg ${
+              isActive
+                ? "bg-slate-700"
+                : "hover:bg-slate-800"
+            }`
+          }
+        >
+          <Car size={20} />
+          Vehicles
+        </NavLink>
 
-       <NavLink
-  to="/services"
-  className={({ isActive }) =>
-    `flex items-center gap-3 p-3 rounded-lg ${
-      isActive
-        ? "bg-slate-700"
-        : "hover:bg-slate-800"
-    }`
-  }
->
-  <Wrench size={20} />
-  Services
-</NavLink>
+        <NavLink
+          to="/services"
+          className={({ isActive }) =>
+            `flex items-center gap-3 p-3 rounded-lg ${
+              isActive
+                ? "bg-slate-700"
+                : "hover:bg-slate-800"
+            }`
+          }
+        >
+          <Wrench size={20} />
+          Services
+        </NavLink>
 
-        <div className="flex items-center gap-3 p-3">
+        <NavLink
+          to="/inventory"
+          className={({ isActive }) =>
+            `flex items-center gap-3 p-3 rounded-lg ${
+              isActive
+                ? "bg-slate-700"
+                : "hover:bg-slate-800"
+            }`
+          }
+        >
           <Package size={20} />
           Inventory
-        </div>
+        </NavLink>
 
-           <NavLink
-  to="/billing"
-  className={({ isActive }) =>
-    `flex items-center gap-3 p-3 rounded-lg ${
-      isActive
-        ? "bg-slate-700"
-        : "hover:bg-slate-800"
-    }`
-  }
->
-  <Wrench size={20} />
-  Billing
-</NavLink>
+        <NavLink
+          to="/billing"
+          className={({ isActive }) =>
+            `flex items-center gap-3 p-3 rounded-lg ${
+              isActive
+                ? "bg-slate-700"
+                : "hover:bg-slate-800"
+            }`
+          }
+        >
+          <Receipt size={20} />
+          Billing
+        </NavLink>
 
-        <div className="flex items-center gap-3 p-3">
+        <div className="flex items-center gap-3 p-3 opacity-50">
           <IdCard size={20} />
           License
         </div>
 
-        <div className="flex items-center gap-3 p-3">
+        <div className="flex items-center gap-3 p-3 opacity-50">
           <Shield size={20} />
           Insurance
         </div>
 
-        <div className="flex items-center gap-3 p-3">
+        <div className="flex items-center gap-3 p-3 opacity-50">
           <BarChart3 size={20} />
           Reports
         </div>
 
       </div>
+
     </div>
   );
 };
