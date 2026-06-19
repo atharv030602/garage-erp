@@ -83,10 +83,19 @@ const Sidebar = () => {
           Inventory
         </div>
 
-        <div className="flex items-center gap-3 p-3">
-          <Receipt size={20} />
-          Billing
-        </div>
+           <NavLink
+  to="/billing"
+  className={({ isActive }) =>
+    `flex items-center gap-3 p-3 rounded-lg ${
+      isActive
+        ? "bg-slate-700"
+        : "hover:bg-slate-800"
+    }`
+  }
+>
+  <Wrench size={20} />
+  Billing
+</NavLink>
 
         <div className="flex items-center gap-3 p-3">
           <IdCard size={20} />
