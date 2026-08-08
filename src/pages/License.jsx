@@ -6,19 +6,10 @@ import LicenseTable from "../components/LicenseTable";
 
 const License = () => {
   const [licenses, setLicenses] =
-    useState([]);
+    useState(() => JSON.parse(localStorage.getItem("licenses")) || []);
 
   const [editingLicense, setEditingLicense] =
     useState(null);
-
-  useEffect(() => {
-    const savedLicenses =
-      JSON.parse(
-        localStorage.getItem("licenses")
-      ) || [];
-
-    setLicenses(savedLicenses);
-  }, []);
 
   useEffect(() => {
     localStorage.setItem(

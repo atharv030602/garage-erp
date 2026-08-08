@@ -30,6 +30,8 @@ const InvoiceForm = ({
 
     if (editingInvoice) {
 
+      // Sync form state with the record selected for editing (external prop change).
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setFormData(editingInvoice);
 
     } else {
@@ -48,6 +50,8 @@ const InvoiceForm = ({
 
     }
 
+    // getNextInvoiceNo is derived purely from `invoices`, already listed below.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [editingInvoice, invoices]);
 
   useEffect(() => {
@@ -70,6 +74,8 @@ const InvoiceForm = ({
     const total =
       subtotal + gstAmount;
 
+    // Keeps totalAmount in formData (persisted with the invoice) in sync with its inputs.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setFormData((prev) => ({
       ...prev,
       totalAmount: total,

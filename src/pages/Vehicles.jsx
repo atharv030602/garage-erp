@@ -5,24 +5,14 @@ import VehicleForm from "../components/VehicleForm";
 import VehicleTable from "../components/VehicleTable";
 
 const Vehicles = () => {
-  const [vehicles, setVehicles] = useState([]);
-  const [customers, setCustomers] = useState([]);
+  const [vehicles, setVehicles] = useState(
+    () => JSON.parse(localStorage.getItem("vehicles")) || []
+  );
+  const [customers] = useState(
+    () => JSON.parse(localStorage.getItem("customers")) || []
+  );
   const [editingVehicle, setEditingVehicle] =
     useState(null);
-
-  useEffect(() => {
-    const savedVehicles =
-      JSON.parse(localStorage.getItem("vehicles")) || [];
-
-    setVehicles(savedVehicles);
-  }, []);
-
-  useEffect(() => {
-    const savedCustomers =
-      JSON.parse(localStorage.getItem("customers")) || [];
-
-    setCustomers(savedCustomers);
-  }, []);
 
   useEffect(() => {
     localStorage.setItem(

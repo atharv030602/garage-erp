@@ -5,15 +5,10 @@ import CustomerForm from "../components/CustomerForm";
 import CustomerTable from "../components/CustomerTable";
 
 const Customers = () => {
-  const [customers, setCustomers] = useState([]);
+  const [customers, setCustomers] = useState(
+    () => JSON.parse(localStorage.getItem("customers")) || []
+  );
   const [editingCustomer, setEditingCustomer] = useState(null);
-
-  useEffect(() => {
-    const savedCustomers =
-      JSON.parse(localStorage.getItem("customers")) || [];
-
-    setCustomers(savedCustomers);
-  }, []);
 
   useEffect(() => {
     localStorage.setItem(

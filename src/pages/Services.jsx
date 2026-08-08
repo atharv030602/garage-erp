@@ -5,26 +5,17 @@ import ServiceForm from "../components/ServiceForm";
 import ServiceTable from "../components/ServiceTable";
 
 const Services = () => {
-  const [services, setServices] = useState([]);
-  const [customers, setCustomers] = useState([]);
-  const [vehicles, setVehicles] = useState([]);
+  const [services, setServices] = useState(
+    () => JSON.parse(localStorage.getItem("services")) || []
+  );
+  const [customers] = useState(
+    () => JSON.parse(localStorage.getItem("customers")) || []
+  );
+  const [vehicles] = useState(
+    () => JSON.parse(localStorage.getItem("vehicles")) || []
+  );
   const [editingService, setEditingService] =
     useState(null);
-
-  useEffect(() => {
-    const savedServices =
-      JSON.parse(localStorage.getItem("services")) || [];
-
-    const savedCustomers =
-      JSON.parse(localStorage.getItem("customers")) || [];
-
-    const savedVehicles =
-      JSON.parse(localStorage.getItem("vehicles")) || [];
-
-    setServices(savedServices);
-    setCustomers(savedCustomers);
-    setVehicles(savedVehicles);
-  }, []);
 
   useEffect(() => {
     localStorage.setItem(

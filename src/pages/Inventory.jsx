@@ -5,18 +5,11 @@ import InventoryForm from "../components/InventoryForm";
 import InventoryTable from "../components/InventoryTable";
 
 const Inventory = () => {
-  const [items, setItems] = useState([]);
+  const [items, setItems] = useState(
+    () => JSON.parse(localStorage.getItem("inventory")) || []
+  );
   const [editingItem, setEditingItem] =
     useState(null);
-
-  useEffect(() => {
-    const savedItems =
-      JSON.parse(
-        localStorage.getItem("inventory")
-      ) || [];
-
-    setItems(savedItems);
-  }, []);
 
   useEffect(() => {
     localStorage.setItem(

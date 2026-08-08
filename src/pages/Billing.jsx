@@ -6,29 +6,18 @@ import InvoiceTable from "../components/InvoiceTable";
 import InvoiceModal from "../components/InvoiceModal";
 
 const Billing = () => {
-  const [invoices, setInvoices] = useState([]);
-  const [services, setServices] = useState([]);
+  const [invoices, setInvoices] = useState(
+    () => JSON.parse(localStorage.getItem("invoices")) || []
+  );
+  const [services] = useState(
+    () => JSON.parse(localStorage.getItem("services")) || []
+  );
 
   const [editingInvoice, setEditingInvoice] =
     useState(null);
 
   const [selectedInvoice, setSelectedInvoice] =
     useState(null);
-
-  useEffect(() => {
-    const savedInvoices =
-      JSON.parse(
-        localStorage.getItem("invoices")
-      ) || [];
-
-    const savedServices =
-      JSON.parse(
-        localStorage.getItem("services")
-      ) || [];
-
-    setInvoices(savedInvoices);
-    setServices(savedServices);
-  }, []);
 
   useEffect(() => {
     localStorage.setItem(

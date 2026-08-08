@@ -11,7 +11,7 @@ import Inventory from "./pages/Inventory";
 import License from "./pages/License";
 import Reports from "./pages/Reports";
 
-import { useTheme } from "./context/ThemeContext";
+import { useTheme } from "./context/useTheme";
 
 function App() {
   const { darkMode } = useTheme();

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import DashboardCard from "../components/DashboardCard";
 import Navbar from "../components/Navbar";
@@ -28,43 +28,21 @@ import {
 } from "recharts";
 
 const Dashboard = () => {
-  const [customers, setCustomers] = useState([]);
-  const [vehicles, setVehicles] = useState([]);
-  const [services, setServices] = useState([]);
-  const [invoices, setInvoices] = useState([]);
-  const [inventory, setInventory] = useState([]);
-
-  useEffect(() => {
-    setCustomers(
-      JSON.parse(
-        localStorage.getItem("customers")
-      ) || []
-    );
-
-    setVehicles(
-      JSON.parse(
-        localStorage.getItem("vehicles")
-      ) || []
-    );
-
-    setServices(
-      JSON.parse(
-        localStorage.getItem("services")
-      ) || []
-    );
-
-    setInvoices(
-      JSON.parse(
-        localStorage.getItem("invoices")
-      ) || []
-    );
-
-    setInventory(
-      JSON.parse(
-        localStorage.getItem("inventory")
-      ) || []
-    );
-  }, []);
+  const [customers] = useState(
+    () => JSON.parse(localStorage.getItem("customers")) || []
+  );
+  const [vehicles] = useState(
+    () => JSON.parse(localStorage.getItem("vehicles")) || []
+  );
+  const [services] = useState(
+    () => JSON.parse(localStorage.getItem("services")) || []
+  );
+  const [invoices] = useState(
+    () => JSON.parse(localStorage.getItem("invoices")) || []
+  );
+  const [inventory] = useState(
+    () => JSON.parse(localStorage.getItem("inventory")) || []
+  );
 
   const totalRevenue = invoices.reduce(
     (total, invoice) =>

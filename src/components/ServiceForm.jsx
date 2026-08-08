@@ -35,6 +35,8 @@ const ServiceForm = ({
 
   useEffect(() => {
     if (editingService) {
+      // Sync form state with the record selected for editing (external prop change).
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setFormData(editingService);
     } else {
       setFormData({
@@ -48,6 +50,8 @@ const ServiceForm = ({
         remarks: "",
       });
     }
+    // getNextJobCard is derived purely from `services`, already listed below.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [editingService, services]);
 
   const handleChange = (e) => {

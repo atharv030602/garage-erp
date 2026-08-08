@@ -1,63 +1,21 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Navbar from "../components/Navbar";
 
 const Reports = () => {
-  const [customers, setCustomers] =
-    useState([]);
+  const [customers] =
+    useState(() => JSON.parse(localStorage.getItem("customers")) || []);
 
-  const [vehicles, setVehicles] =
-    useState([]);
+  const [vehicles] =
+    useState(() => JSON.parse(localStorage.getItem("vehicles")) || []);
 
-  const [services, setServices] =
-    useState([]);
+  const [services] =
+    useState(() => JSON.parse(localStorage.getItem("services")) || []);
 
-  const [invoices, setInvoices] =
-    useState([]);
+  const [invoices] =
+    useState(() => JSON.parse(localStorage.getItem("invoices")) || []);
 
-  const [inventory, setInventory] =
-    useState([]);
-
-  useEffect(() => {
-    setCustomers(
-      JSON.parse(
-        localStorage.getItem(
-          "customers"
-        )
-      ) || []
-    );
-
-    setVehicles(
-      JSON.parse(
-        localStorage.getItem(
-          "vehicles"
-        )
-      ) || []
-    );
-
-    setServices(
-      JSON.parse(
-        localStorage.getItem(
-          "services"
-        )
-      ) || []
-    );
-
-    setInvoices(
-      JSON.parse(
-        localStorage.getItem(
-          "invoices"
-        )
-      ) || []
-    );
-
-    setInventory(
-      JSON.parse(
-        localStorage.getItem(
-          "inventory"
-        )
-      ) || []
-    );
-  }, []);
+  const [inventory] =
+    useState(() => JSON.parse(localStorage.getItem("inventory")) || []);
 
   const totalRevenue =
     invoices.reduce(

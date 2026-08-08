@@ -20,6 +20,8 @@ const InventoryForm = ({
 
     if (editingItem) {
 
+      // Sync form state with the record selected for editing (external prop change).
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setFormData(editingItem);
 
     } else {
